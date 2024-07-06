@@ -24,6 +24,6 @@ const fetchWeather = (city: string) => {
             return await response.json();
         },
         ["weather", city],
-        {revalidate: 60 * 10}
+        {revalidate: 60 * 30} // 30 minutes
     );
 }
