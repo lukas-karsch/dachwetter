@@ -1,6 +1,11 @@
 export const dateFormatter = new Intl.DateTimeFormat('de-DE', {
-    weekday: 'long', // displays the full name of the day
+    weekday: 'long',
     year: 'numeric',
-    month: 'long', // displays the full name of the month
+    month: 'long',
     day: 'numeric'
 });
+
+export const timeFormatter = new Intl.DateTimeFormat('de-DE', {
+    hour: "numeric",
+    minute: "numeric",
+})
