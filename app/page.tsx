@@ -10,6 +10,9 @@ import DachwetterHeading from "@/components/DachwetterHeading";
 export default async function HomeScreen() {
     // TODO change location? do I want this at all?
     const weather = await getWeather("Stuttgart");
+    if(!weather) {
+        throw new Error();
+    }
     const dachwetter = extractDachwetter(weather);
 
     const nextDachwetter = dachwetter.findIndex(dachwetter => dachwetter.isDachwetter);
@@ -34,7 +37,7 @@ export default async function HomeScreen() {
                             {dachwetter.map(wetter => {
                                 return <WeatherCard key={wetter.plusDays}
                                                     dachwetter={wetter.isDachwetter}
-                                                    temperature={wetter.degrees}
+                                                    feelsLike={wetter.degrees}
                                                     icon={wetter.icon}
                                                     plusDays={wetter.plusDays}
                                 />

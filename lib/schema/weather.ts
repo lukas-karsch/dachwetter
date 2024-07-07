@@ -6,6 +6,7 @@ function getIcon(iconResponse: string): WeatherIcon {
     if(iconResponse.startsWith("01")) return "SUN";
     else if(iconResponse.startsWith("02")) return "SUN_AND_CLOUDS";
     else if(iconResponse.startsWith("09") || iconResponse.startsWith("10")) return "RAIN";
+    else if(iconResponse.startsWith("11")) return "THUNDERSTORM";
     return "CLOUDS";
 }
 
@@ -29,6 +30,9 @@ const forecastSchema = z.object({
     main: z.object({
         temp: z.number(),
         feels_like: z.number(),
+    }).transform(main => {
+        const {temp, feels_like} = main;
+        return {feelsLike: feels_like, temp: temp};
     }),
     weather: z.array(weatherSchema),
     wind: windSchema.optional(),
@@ -56,4 +60,4 @@ export const weatherResponseSchema = z.object({
 
 export type WeatherResponse = z.infer<typeof weatherResponseSchema>;
 export type ThreeHourForecast = z.infer<typeof forecastSchema>;
-export type WeatherIcon = "SUN" | "RAIN" | "CLOUDS" | "SUN_AND_CLOUDS";
+export type WeatherIcon = "SUN" | "RAIN" | "CLOUDS" | "SUN_AND_CLOUDS" | "THUNDERSTORM";

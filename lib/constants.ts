@@ -1,0 +1,1 @@
+export const DACHWETTER_TEMP_THRESHOLD = 22;

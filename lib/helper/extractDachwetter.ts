@@ -1,5 +1,6 @@
 import {ThreeHourForecast, WeatherIcon, WeatherResponse} from "@/lib/schema/weather";
 import {getPlusDays} from "@/lib/format/dates";
+import {DACHWETTER_TEMP_THRESHOLD} from "@/lib/constants";
 
 export type Dachwetter = {
     degrees: number,
@@ -30,7 +31,9 @@ export function extractDachwetter(weather: WeatherResponse): Array<Dachwetter> {
     return Object.entries(grouped).map(([day, forecasts]) => {
         const date = new Date(day);
 
-        const degrees = forecasts.reduce((sum, forecast) => sum + forecast.main.temp, 0) / forecasts.length;
+        const maxTemp = forecasts.reduce((acc, forecast) =>
+            forecast.main.feelsLike > acc ? forecast.main.feelsLike : acc, -Infinity
+        );
 
         const totalRain = forecasts.reduce((sum, forecast) => sum + (forecast.rain?.['3h'] || 0), 0);
         const averageWind = forecasts.reduce((sum, forecast) => sum + (forecast.wind?.speed || 0), 0) / forecasts.length;
@@ -39,7 +42,8 @@ export function extractDachwetter(weather: WeatherResponse): Array<Dachwetter> {
             "SUN": 0,
             "CLOUDS": 0,
             "SUN_AND_CLOUDS": 0,
-            "RAIN": 0
+            "RAIN": 0,
+            "THUNDERSTORM": 0,
         };
 
         forecasts.forEach(forecast => counts[forecast.weather[0].icon]++);
@@ -48,8 +52,8 @@ export function extractDachwetter(weather: WeatherResponse): Array<Dachwetter> {
                 entry[1] > max[1] ? entry : max, ["", -Infinity])[0] as WeatherIcon
 
         return {
-            degrees,
-            isDachwetter: degrees > 20 && icon !== "RAIN" && icon !== "CLOUDS",
+            degrees: maxTemp,
+            isDachwetter: maxTemp > DACHWETTER_TEMP_THRESHOLD && icon !== "RAIN" && icon !== "CLOUDS",
             rain: `${totalRain.toFixed(2)} mm`,
             wind: `${averageWind.toFixed(2)} m/s`,
             plusDays: getPlusDays(date),

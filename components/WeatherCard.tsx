@@ -1,17 +1,17 @@
 import React from "react";
 import {cn} from "@/lib/utils";
-import {Cloud, CloudRain, CloudSun, Sun} from "lucide-react";
+import {Cloud, CloudLightning, CloudRain, CloudSun, Sun} from "lucide-react";
 import {type WeatherIcon} from "@/lib/schema/weather";
 import {getRelativeDayString} from "@/lib/format/dates";
 
 type WeatherCardProps = {
     dachwetter: boolean,
-    temperature: number,
+    feelsLike: number,
     icon: WeatherIcon,
     plusDays: number,
 }
 
-export function WeatherCard({dachwetter, temperature, plusDays, icon}: WeatherCardProps) {
+export function WeatherCard({dachwetter, feelsLike, plusDays, icon}: WeatherCardProps) {
     const dayString = getRelativeDayString(plusDays);
 
     return (
@@ -23,8 +23,9 @@ export function WeatherCard({dachwetter, temperature, plusDays, icon}: WeatherCa
                 <WeatherIcon icon={icon}/>
             </div>
             <div>
-                <p className="text-4xl font-bold">{Math.round(temperature)}°C</p>
-                <p className="text-lg text-secondary-foreground">{dayString}</p>
+                <p className="text-sm">{"Gefühlt"}</p>
+                <p className="text-4xl font-bold">{Math.round(feelsLike)}°C</p>
+                <p className="text-lg text-secondary-foreground mt-1">{dayString}</p>
             </div>
         </div>
     );
@@ -39,6 +40,8 @@ function WeatherIcon({icon}: { icon: WeatherIcon }) {
         return <CloudRain size={size} className="drop-shadow-lg"/>
     } else if (icon === "SUN_AND_CLOUDS") {
         return <CloudSun size={size} className="drop-shadow-lg"/>
+    } else if (icon === "THUNDERSTORM") {
+        return <CloudLightning size={size} className="drop-shadow-lg"/>
     }
     return <Cloud size={size} className="drop-shadow-lg"/>
 }
