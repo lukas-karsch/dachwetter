@@ -2,15 +2,26 @@ import {z} from "zod";
 
 const dateFromNumber = z.number().transform(num => new Date(num * 1000));
 
+function getIcon(iconResponse: string): WeatherIcon {
+    if(iconResponse.startsWith("01")) return "SUN";
+    else if(iconResponse.startsWith("02")) return "SUN_AND_CLOUDS";
+    else if(iconResponse.startsWith("09") || iconResponse.startsWith("10")) return "RAIN";
+    return "CLOUDS";
+}
+
 const weatherSchema = z.object({
     id: z.number(),
     main: z.string(),
     description: z.string(),
-    icon: z.string(),
+    icon: z.string().transform(original => getIcon(original)),
 });
 
 const windSchema = z.object({
     speed: z.number(),
+});
+
+const rainSchema = z.object({
+    "3h": z.number(),
 });
 
 const forecastSchema = z.object({
@@ -20,7 +31,8 @@ const forecastSchema = z.object({
         feels_like: z.number(),
     }),
     weather: z.array(weatherSchema),
-    wind: windSchema
+    wind: windSchema.optional(),
+    rain: rainSchema.optional(),
 }).transform(original => {
     const {dt, ...rest} = original;
     // rename date field
@@ -43,3 +55,5 @@ export const weatherResponseSchema = z.object({
 });
 
 export type WeatherResponse = z.infer<typeof weatherResponseSchema>;
+export type ThreeHourForecast = z.infer<typeof forecastSchema>;
+export type WeatherIcon = "SUN" | "RAIN" | "CLOUDS" | "SUN_AND_CLOUDS";

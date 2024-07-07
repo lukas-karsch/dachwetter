@@ -14,7 +14,7 @@ export async function getWeather(city: string): Promise<WeatherResponse> {
 
 const fetchWeather = (city: string) => {
     return unstable_cache(
-        async (): Promise<WeatherResponse> => {
+        async (): Promise<JSON> => {
             const params = new URLSearchParams({
                 q: city,
                 appid: env.API_TOKEN,
@@ -23,7 +23,7 @@ const fetchWeather = (city: string) => {
             const response = await fetch(URL + params);
             return await response.json();
         },
-        ["weather", city],
+        [city],
         {revalidate: 60 * 30} // 30 minutes
     );
 }

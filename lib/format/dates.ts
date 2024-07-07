@@ -8,26 +8,31 @@ export const dateFormatter = new Intl.DateTimeFormat('de-DE', {
 export const timeFormatter = new Intl.DateTimeFormat('de-DE', {
     hour: "numeric",
     minute: "numeric",
-})
+});
 
-export function getRelativeDayString(date: Date) {
-    const currentDate = new Date();
-    const givenDate = new Date(date);
+export const getPlusDays = (date: Date) => {
+    const today = new Date();
+    const timeDiff = date.getTime() - today.getTime();
+    return Math.ceil(timeDiff / (1000 * 3600 * 24));
+};
 
-    const timeDifference = givenDate.getTime() - currentDate.getTime();
-    const dayDifference = Math.ceil(timeDifference / (1000 * 3600 * 24));
+export function getRelativeDayStringFromDate(date: Date) {
+    const dayDifference = getPlusDays(date);
+    return getRelativeDayString(dayDifference);
+}
 
-    if (dayDifference === 0) {
+export function getRelativeDayString(plusDays: number) {
+    if (plusDays === 0) {
         return "Heute";
-    } else if (dayDifference === 1) {
+    } else if (plusDays === 1) {
         return "Morgen";
-    } else if (dayDifference === 2) {
+    } else if (plusDays === 2) {
         return "Übermorgen";
-    } else if (dayDifference === -1) {
+    } else if (plusDays === -1) {
         return "Gestern";
-    } else if (dayDifference > 1) {
-        return `In ${dayDifference} days`;
+    } else if (plusDays > 1) {
+        return `In ${plusDays} Tagen`;
     } else {
-        return `${Math.abs(dayDifference)} days ago`;
+        return `Vor ${Math.abs(plusDays)} Tagen`;
     }
 }
