@@ -7,12 +7,14 @@ import {unstable_cache} from "next/cache";
 const URL = "https://api.openweathermap.org/data/2.5/forecast?"
 
 export async function getWeather(city: string): Promise<WeatherResponse> {
+    // TODO handle connection errors -> return default weather if in dev, otherwise display error message
     const f = fetchWeather(city);
     const json = await f();
     return weatherResponseSchema.parse(json);
 }
 
 const fetchWeather = (city: string) => {
+    // TODO: unstable_cache probably unnecessary, export const revalidate = 60 * 30 should be enough
     return unstable_cache(
         async (): Promise<JSON> => {
             const params = new URLSearchParams({

@@ -11,7 +11,7 @@ export type Dachwetter = {
 }
 
 const groupedByDay = (weatherResponse: WeatherResponse): { [key: string]: ThreeHourForecast[] } => {
-    // TODO group by evening
+    // TODO get evening weather
     return weatherResponse.forecasts.reduce((acc, forecast: ThreeHourForecast) => {
         const day = forecast.date.toISOString().split('T')[0]; // Get the date part in YYYY-MM-DD format
 
@@ -33,7 +33,7 @@ export function extractDachwetter(weather: WeatherResponse): Array<Dachwetter> {
         const degrees = forecasts.reduce((sum, forecast) => sum + forecast.main.temp, 0) / forecasts.length;
 
         const totalRain = forecasts.reduce((sum, forecast) => sum + (forecast.rain?.['3h'] || 0), 0);
-        const averageWind = forecasts.reduce((sum, forecast) => sum + forecast.wind.speed, 0) / forecasts.length;
+        const averageWind = forecasts.reduce((sum, forecast) => sum + (forecast.wind?.speed || 0), 0) / forecasts.length;
 
         const counts: Record<WeatherIcon, number> = {
             "SUN": 0,

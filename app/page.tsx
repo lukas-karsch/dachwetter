@@ -5,20 +5,22 @@ import {WeatherCard} from "@/components/WeatherCard";
 import React from "react";
 import {extractDachwetter} from "@/lib/helper/extractDachwetter";
 import {timeFormatter} from "@/lib/format/dates";
+import DachwetterHeading from "@/components/DachwetterHeading";
 
 export default async function HomeScreen() {
     const weather = await getWeather("Stuttgart");
     const dachwetter = extractDachwetter(weather);
 
+    const nextDachwetter = dachwetter.findIndex(dachwetter => dachwetter.isDachwetter);
+
     return (
         <main className="min-h-screen p-24 flex justify-center">
             <div className="container">
                 <div className="flex justify-between items-end">
-                    <h1 className="text-4xl font-semibold">
-                        Heute ist <br/>
-                        <span className="font-black text-primary">Dachwetter!</span>
-                    </h1>
-                    <ShareButton degreesToday={27}/>
+                    <DachwetterHeading nextDachwetter={nextDachwetter} />
+                    {nextDachwetter > 0 &&
+                        <ShareButton degrees={27} nextDachwetter={nextDachwetter} />
+                    }
                 </div>
                 <div className="mt-4 rounded-2xl p-8 bg-accent space-y-8">
                     <div className="flex gap-4 lg:gap-32 flex-wrap">
