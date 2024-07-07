@@ -18,9 +18,9 @@ export default async function HomeScreen() {
     const nextDachwetter = dachwetter.findIndex(dachwetter => dachwetter.isDachwetter);
 
     return (
-        <main className="min-h-screen px-4 py-16 sm:p-24 flex justify-center">
+        <main className="min-h-screen px-4 py-16 md:p-24 flex justify-center">
             <div className="container">
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end">
+                <div className="flex flex-col gap-2 sm:flex-row justify-between items-start sm:items-end">
                     <DachwetterHeading nextDachwetter={nextDachwetter} />
                     {nextDachwetter > 0 &&
                         <ShareButton degrees={27} nextDachwetter={nextDachwetter} />
