@@ -10,14 +10,14 @@ export default function DachwetterHeading({nextDachwetter}: { nextDachwetter: nu
         return (
             <h1 className="text-4xl font-semibold">
                 Heute ist <br/>
-                <span className="font-black text-primary">Dachwetter!</span>
+                <span className="font-black text-primary text-5xl">Dachwetter!</span>
             </h1>
         );
     }
     return (
         <h1 className="text-4xl font-semibold">
             In {nextDachwetter} Tagen ist<br/>
-            <span className="font-black text-primary">Dachwetter!</span>
+            <span className="font-black text-primary text-5xl">Dachwetter!</span>
         </h1>
     );
 }

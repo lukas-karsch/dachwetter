@@ -43,16 +43,17 @@ export function extractDachwetter(weather: WeatherResponse): Array<Dachwetter> {
         };
 
         forecasts.forEach(forecast => counts[forecast.weather[0].icon]++);
+        const icon = Object.entries(counts).reduce(
+            (max, entry) =>
+                entry[1] > max[1] ? entry : max, ["", -Infinity])[0] as WeatherIcon
 
         return {
             degrees,
-            isDachwetter: degrees > 20 && totalRain < 5 && averageWind < 10,
+            isDachwetter: degrees > 20 && icon !== "RAIN" && icon !== "CLOUDS",
             rain: `${totalRain.toFixed(2)} mm`,
             wind: `${averageWind.toFixed(2)} m/s`,
             plusDays: getPlusDays(date),
-            icon: Object.entries(counts).reduce(
-                (max, entry) =>
-                    entry[1] > max[1] ? entry : max, ["", -Infinity])[0] as WeatherIcon
+            icon: icon
         };
     });
 }

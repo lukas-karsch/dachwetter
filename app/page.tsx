@@ -8,15 +8,16 @@ import {timeFormatter} from "@/lib/format/dates";
 import DachwetterHeading from "@/components/DachwetterHeading";
 
 export default async function HomeScreen() {
+    // TODO change location? do I want this at all?
     const weather = await getWeather("Stuttgart");
     const dachwetter = extractDachwetter(weather);
 
     const nextDachwetter = dachwetter.findIndex(dachwetter => dachwetter.isDachwetter);
 
     return (
-        <main className="min-h-screen p-24 flex justify-center">
+        <main className="min-h-screen px-4 py-16 sm:p-24 flex justify-center">
             <div className="container">
-                <div className="flex justify-between items-end">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end">
                     <DachwetterHeading nextDachwetter={nextDachwetter} />
                     {nextDachwetter > 0 &&
                         <ShareButton degrees={27} nextDachwetter={nextDachwetter} />
