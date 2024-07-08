@@ -32,6 +32,7 @@ const forecastSchema = z.object({
         feels_like: z.number(),
     }).transform(main => {
         const {temp, feels_like} = main;
+        // rename feels_like field
         return {feelsLike: feels_like, temp: temp};
     }),
     weather: z.array(weatherSchema),
