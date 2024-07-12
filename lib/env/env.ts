@@ -2,7 +2,7 @@ import {z} from 'zod';
 
 const envSchema = z.object({
     API_TOKEN: z.string(),
-    ENV: z
+    NODE_ENV: z
         .union([
             z.literal('development'),
             z.literal('testing'),

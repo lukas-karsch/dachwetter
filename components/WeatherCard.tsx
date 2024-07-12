@@ -24,7 +24,7 @@ export function WeatherCard({dachwetter, feelsLike, plusDays, icon}: WeatherCard
             </div>
             <div>
                 <p className="text-sm">{"Gefühlt"}</p>
-                <p className="text-4xl font-bold">{Math.round(feelsLike)}°C</p>
+                <p className="text-4xl font-bold">{feelsLike}°C</p>
                 <p className="text-lg text-secondary-foreground mt-1">{dayString}</p>
             </div>
         </div>

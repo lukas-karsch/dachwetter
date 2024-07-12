@@ -52,7 +52,7 @@ export function extractDachwetter(weather: WeatherResponse): Array<Dachwetter> {
                 entry[1] > max[1] ? entry : max, ["", -Infinity])[0] as WeatherIcon
 
         return {
-            degrees: maxTemp,
+            degrees: Math.round(maxTemp),
             isDachwetter: maxTemp > DACHWETTER_TEMP_THRESHOLD && icon !== "RAIN" && averageWind < 2.5,
             rain: formatRain(totalRain),
             wind: formatWind(averageWind),
