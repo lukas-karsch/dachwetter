@@ -7,6 +7,8 @@ import {extractDachwetter} from "@/lib/helper/extractDachwetter";
 import {timeFormatter} from "@/lib/format/dates";
 import DachwetterHeading from "@/components/DachwetterHeading";
 
+export const revalidate = 1800; // 30 minutes
+
 export default async function HomeScreen() {
     // TODO change location? do I want this at all?
     const weather = await getWeather("Stuttgart");
