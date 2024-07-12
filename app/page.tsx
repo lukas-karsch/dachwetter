@@ -6,6 +6,7 @@ import React from "react";
 import {extractDachwetter} from "@/lib/helper/extractDachwetter";
 import DachwetterHeading from "@/components/DachwetterHeading";
 import Time from "@/components/Time";
+import {getOwnUrl} from "@/lib/helper/origin";
 
 export const revalidate = 1800; // 30 minutes
 
@@ -32,7 +33,7 @@ export default async function HomeScreen() {
                 <div className="flex flex-col gap-2 sm:flex-row justify-between items-start sm:items-end">
                     <DachwetterHeading nextDachwetter={nextDachwetter}/>
                     {nextDachwetter > 0 &&
-                        <ShareButton degrees={dachwetter[nextDachwetter].degrees} nextDachwetter={nextDachwetter}/>}
+                        <ShareButton degrees={dachwetter[nextDachwetter].degrees} nextDachwetter={nextDachwetter} url={getOwnUrl()}/>}
                 </div>
                 <div className="mt-4 rounded-2xl p-8 bg-accent space-y-8">
                     <div className="flex gap-4 lg:gap-32 flex-wrap justify-between">
