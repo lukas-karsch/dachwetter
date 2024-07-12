@@ -1,6 +1,6 @@
 Bootstrapped with Next.js.
 
-Dachwetter utilizes the open weather API (https://openweathermap.org) and shadcn for UI components & theming (https://ui.shadcn.com/).
+Dachwetter utilizes the [open weather API](https://openweathermap.org) and [shadcn](https://ui.shadcn.com/) for UI components & theming.
 
 ## Developer Guidance
 
@@ -29,4 +29,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 This app doesn't need a database. It generates a static page that gets revalidated every 30 minutes. 
 
-Dachwetter is currently deployed on vercel (https://vercel.com)
+Dachwetter is currently deployed on [Vercel](https://vercel.com).
