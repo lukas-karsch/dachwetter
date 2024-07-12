@@ -4,7 +4,7 @@ const dateFromNumber = z.number().transform(num => new Date(num * 1000));
 
 function getIcon(iconResponse: string): WeatherIcon {
     if(iconResponse.startsWith("01")) return "SUN";
-    else if(iconResponse.startsWith("02")) return "SUN_AND_CLOUDS";
+    else if(iconResponse.startsWith("02") || iconResponse.startsWith("03")) return "SUN_AND_CLOUDS";
     else if(iconResponse.startsWith("09") || iconResponse.startsWith("10")) return "RAIN";
     else if(iconResponse.startsWith("11")) return "THUNDERSTORM";
     return "CLOUDS";

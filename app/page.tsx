@@ -4,8 +4,8 @@ import {ScrollArea, ScrollBar} from "@/components/ui/scroll-area";
 import {WeatherCard} from "@/components/WeatherCard";
 import React from "react";
 import {extractDachwetter} from "@/lib/helper/extractDachwetter";
-import {timeFormatter} from "@/lib/format/dates";
 import DachwetterHeading from "@/components/DachwetterHeading";
+import Time from "@/components/Time";
 
 export const revalidate = 1800; // 30 minutes
 
@@ -36,7 +36,7 @@ export default async function HomeScreen() {
                 </div>
                 <div className="mt-4 rounded-2xl p-8 bg-accent space-y-8">
                     <div className="flex gap-4 lg:gap-32 flex-wrap justify-between">
-                        <p className="text-lg">Sonnenuntergang um {timeFormatter.format(weather.city.sunset)}</p>
+                        <p className="text-lg">Sonnenuntergang um <Time time={weather.city.sunset} /></p>
                         <p className="text-lg">{windMessage}</p>
                         <p className="text-lg">{rainMessage}</p>
                     </div>

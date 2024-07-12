@@ -9,12 +9,12 @@ const inter = Inter({subsets: ["latin"]});
 
 export const metadata: Metadata = {
     title: "Dachwetter",
-    description: "Wann kann man wieder aufs Dach?",
+    description: "Wann kann man wieder aufs Dach? Diese App verrät es dir!"
 };
 
 export default function RootLayout({children}: Readonly<{ children: React.ReactNode; }>) {
     return (
-        <html lang="de">
+        <html lang="de" suppressHydrationWarning>
         <body className={inter.className}>
         <ThemeProvider attribute="class"
                        defaultTheme="system" enableSystem>
