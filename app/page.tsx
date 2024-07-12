@@ -35,7 +35,7 @@ export default async function HomeScreen() {
                         <ShareButton degrees={dachwetter[nextDachwetter].degrees} nextDachwetter={nextDachwetter}/>}
                 </div>
                 <div className="mt-4 rounded-2xl p-8 bg-accent space-y-8">
-                    <div className="flex gap-4 lg:gap-32 flex-wrap">
+                    <div className="flex gap-4 lg:gap-32 flex-wrap justify-between">
                         <p className="text-lg">Sonnenuntergang um {timeFormatter.format(weather.city.sunset)}</p>
                         <p className="text-lg">{windMessage}</p>
                         <p className="text-lg">{rainMessage}</p>

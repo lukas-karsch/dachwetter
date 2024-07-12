@@ -17,7 +17,7 @@ export function WeatherCard({dachwetter, feelsLike, plusDays, icon}: WeatherCard
     return (
         <div className={
             cn(`w-[250px] h-[320px] rounded-lg flex justify-around flex-col p-8 shadow-lg`,
-                dachwetter ? "bg-primary" : "bg-zinc-500")}
+                dachwetter ? "bg-primary" : "bg-zinc-400 dark:bg-zinc-500")}
         >
             <div className="flex justify-center items-center">
                 <WeatherIcon icon={icon}/>

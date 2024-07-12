@@ -51,8 +51,6 @@ export function extractDachwetter(weather: WeatherResponse): Array<Dachwetter> {
             (max, entry) =>
                 entry[1] > max[1] ? entry : max, ["", -Infinity])[0] as WeatherIcon
 
-        console.log(forecasts[0]);
-
         return {
             degrees: maxTemp,
             isDachwetter: maxTemp > DACHWETTER_TEMP_THRESHOLD && icon !== "RAIN" && averageWind < 2.5,
