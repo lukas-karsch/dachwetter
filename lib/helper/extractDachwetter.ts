@@ -61,22 +61,3 @@ export function extractDachwetter(weather: WeatherResponse): Array<Dachwetter> {
         };
     });
 }
-
-function formatWind(wind: number): string {
-    if(wind < 0.5) {
-        return "Windstill";
-    } else if(wind < 1.5) {
-        return "Schwacher Wind";
-    } else if(wind < 2.5) {
-        return "Mäßiger Wind..."
-    } else return "Starker Wind";
-}
-
-function formatRain(rain: number): string {
-    if (rain === 0) {
-        return "Kein Regen";
-    }
-    if(rain < 2) {
-        return "Leichter Regen";
-    } else return "Regen";
-}
