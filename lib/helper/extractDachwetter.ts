@@ -51,13 +51,34 @@ export function extractDachwetter(weather: WeatherResponse): Array<Dachwetter> {
             (max, entry) =>
                 entry[1] > max[1] ? entry : max, ["", -Infinity])[0] as WeatherIcon
 
+        console.log(forecasts[0]);
+
         return {
             degrees: maxTemp,
-            isDachwetter: maxTemp > DACHWETTER_TEMP_THRESHOLD && icon !== "RAIN" && icon !== "CLOUDS",
-            rain: `${totalRain.toFixed(2)} mm`,
-            wind: `${averageWind.toFixed(2)} m/s`,
+            isDachwetter: maxTemp > DACHWETTER_TEMP_THRESHOLD && icon !== "RAIN" && averageWind < 2.5,
+            rain: formatRain(totalRain),
+            wind: formatWind(averageWind),
             plusDays: getPlusDays(date),
             icon: icon
         };
     });
+}
+
+function formatWind(wind: number): string {
+    if(wind < 0.5) {
+        return "Windstill";
+    } else if(wind < 1.5) {
+        return "Schwacher Wind";
+    } else if(wind < 2.5) {
+        return "Mäßiger Wind..."
+    } else return "Starker Wind";
+}
+
+function formatRain(rain: number): string {
+    if (rain === 0) {
+        return "Kein Regen";
+    }
+    if(rain < 2) {
+        return "Leichter Regen";
+    } else return "Regen";
 }

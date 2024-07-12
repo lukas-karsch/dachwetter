@@ -18,11 +18,13 @@ const weatherSchema = z.object({
 });
 
 const windSchema = z.object({
+    // in m/s
     speed: z.number(),
+    gust: z.number(),
 });
 
 const rainSchema = z.object({
-    "3h": z.number(),
+    "3h": z.number(), // in mm
 });
 
 const forecastSchema = z.object({
@@ -36,6 +38,7 @@ const forecastSchema = z.object({
         return {feelsLike: feels_like, temp: temp};
     }),
     weather: z.array(weatherSchema),
+    visibility: z.number(), // in meters
     wind: windSchema.optional(),
     rain: rainSchema.optional(),
 }).transform(original => {
