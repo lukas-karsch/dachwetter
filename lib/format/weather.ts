@@ -1,7 +1,7 @@
 /**
  * @param averageWind in m/s
  */
-function formatWind(averageWind: number): string {
+export function formatWind(averageWind: number): string {
     if(averageWind < 0.5) {
         return "Windstill";
     } else if(averageWind < 1.5) {
@@ -14,7 +14,7 @@ function formatWind(averageWind: number): string {
 /**
  * @param totalRain in mm
  */
-function formatRain(totalRain: number): string {
+export function formatRain(totalRain: number): string {
     if (totalRain === 0) {
         return "Kein Regen";
     }

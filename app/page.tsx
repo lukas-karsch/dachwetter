@@ -32,7 +32,7 @@ export default async function HomeScreen() {
             <div className="container">
                 <div className="flex flex-col gap-2 sm:flex-row justify-between items-start sm:items-end">
                     <DachwetterHeading nextDachwetter={nextDachwetter}/>
-                    {nextDachwetter > 0 &&
+                    {nextDachwetter >= 0 &&
                         <ShareButton degrees={dachwetter[nextDachwetter].degrees} nextDachwetter={nextDachwetter} url={getOwnUrl()}/>}
                 </div>
                 <div className="mt-4 rounded-2xl p-8 bg-accent space-y-8">

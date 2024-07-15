@@ -1,6 +1,7 @@
 import {ThreeHourForecast, WeatherIcon, WeatherResponse} from "@/lib/schema/weather";
 import {getPlusDays} from "@/lib/format/dates";
 import {DACHWETTER_TEMP_THRESHOLD} from "@/lib/constants";
+import {formatRain, formatWind} from "@/lib/format/weather";
 
 export type Dachwetter = {
     degrees: number,
