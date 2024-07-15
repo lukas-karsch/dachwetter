@@ -8,7 +8,7 @@ import DachwetterHeading from "@/components/DachwetterHeading";
 import Time from "@/components/Time";
 import {getOwnUrl} from "@/lib/helper/origin";
 
-export const revalidate = 1800; // 30 minutes
+export const revalidate = 900; // 15 minutes
 
 export default async function HomeScreen() {
     // TODO change location? do I want this at all?
