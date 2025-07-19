@@ -8,10 +8,10 @@ import DachwetterHeading from "@/components/DachwetterHeading";
 import Time from "@/components/Time";
 import {getOwnUrl} from "@/lib/helper/origin";
 
-export const revalidate = 900; // 15 minutes
+export const dynamic = "force-dynamic"; // SSR
 
 export default async function HomeScreen() {
-    // TODO change location? do I want this at all?
+    // TODO change location?
     const weather = await getWeather("Stuttgart");
     if (!weather) {
         throw new Error();
@@ -28,7 +28,7 @@ export default async function HomeScreen() {
         : `${dachwetter[nextDachwetter].wind} vorhergesagt`;
 
     return (
-        <main className="min-h-screen px-4 py-16 md:p-24 flex justify-center">
+        <main className="min-h-screen px-4 py-16 md:p-24 flex flex-col justify-center">
             <div className="container">
                 <div className="flex flex-col gap-2 sm:flex-row justify-between items-start sm:items-end">
                     <DachwetterHeading nextDachwetter={nextDachwetter}/>
@@ -54,6 +54,9 @@ export default async function HomeScreen() {
                         <ScrollBar orientation="horizontal"/>
                     </ScrollArea>
                 </div>
+            </div>
+            <div className="text-zinc-300 text-center text-sm">
+                Aktualisiert: {new Date().toLocaleDateString()}, {new Date().toLocaleTimeString()}
             </div>
         </main>
     );

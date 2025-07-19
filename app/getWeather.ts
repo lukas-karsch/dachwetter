@@ -13,9 +13,13 @@ export async function getWeather(city: string): Promise<WeatherResponse | undefi
             appid: env.API_TOKEN,
             units: "metric"
         });
-        const response = await fetch(URL + params);
-        if(response.status !== 200) {
-            console.error("Could not load weather!!");
+        const response = await fetch(URL + params, {
+            next: {
+                revalidate: 900
+            }
+        });
+        if (response.status !== 200) {
+            console.error("Could not load weather!");
             console.error(response.statusText);
             console.error(await response.text());
             return undefined;
